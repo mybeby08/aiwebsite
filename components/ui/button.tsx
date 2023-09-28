@@ -20,6 +20,8 @@ const buttonVariants = cva(
         link: "text-primary underline-offset-4 hover:underline",
         premium:
           "bg-gradient-to-r from-slate-900 via-red-800 to-slate-900 border-0 hover:from-red-800 hover:via-slate-900/90 hover:to-red-800",
+        premiumlanding:
+          " bg-gradient-to-r from-purple-400 via-pink-500 to-pink-600 hover:from-pink-600 hover:via-pink-500 hover:to-purple-400",
       },
       size: {
         default: "h-10 px-4 py-2",

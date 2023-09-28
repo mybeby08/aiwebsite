@@ -15,7 +15,9 @@ import { ChatCompletionMessageParam } from "openai/resources/chat/index.mjs";
 import { cn } from "@/lib/utils";
 import UserAvatar from "@/components/useravatar";
 import BotAvatar from "@/components/botavatar";
+import { useProModal } from "@/hooks/useProModal";
 const Page = () => {
+  const proModal = useProModal();
   const router = useRouter();
   const [messages, setMessages] = useState<ChatCompletionMessageParam[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -39,8 +41,11 @@ const Page = () => {
       });
       setMessages((current) => [...current, userMessage, res.data]);
       form.reset();
-    } catch (e) {
-      console.log(e);
+    } catch (error: any) {
+      //FIX:PROMODAL ON 403
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }

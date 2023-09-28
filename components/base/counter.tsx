@@ -5,11 +5,12 @@ import { MAX_FREE_COUNTS } from "@/constants";
 import { Progress } from "../ui/progress";
 import { Button } from "../ui/button";
 import { Zap } from "lucide-react";
-
+import { useProModal } from "@/hooks/useProModal";
 interface CounterProps {
   count: number;
 }
 const Counter = ({ count = 0 }: CounterProps) => {
+  const proModal = useProModal();
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -17,7 +18,6 @@ const Counter = ({ count = 0 }: CounterProps) => {
   }, []);
 
   if (!mounted) return null;
-
   return (
     <div className="px-3">
       <Card className="bg-white/10 border-0 rounded-xl">
@@ -31,7 +31,12 @@ const Counter = ({ count = 0 }: CounterProps) => {
               value={(count / MAX_FREE_COUNTS) * 100}
             />
           </div>
-          <Button variant="premium" className="w-full rounded-xl">
+          <Button
+            disabled={true}
+            onClick={proModal.onOpen}
+            variant="premium"
+            className="w-full rounded-xl"
+          >
             Upgrade
             <Zap className="w-4 h-4 ml-2" />
           </Button>

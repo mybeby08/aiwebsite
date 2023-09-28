@@ -1,8 +1,15 @@
+import {
+  LandingNavbar,
+  LandingHero,
+  LandingContent,
+} from "@/components/landing";
+
 const LandingPage = () => {
   return (
-    <div>
-      <h1>Landing Page</h1>
-      <h2>Hi there!</h2>
+    <div className="h-full">
+      <LandingNavbar />
+      <LandingHero />
+      <LandingContent />
     </div>
   );
 };

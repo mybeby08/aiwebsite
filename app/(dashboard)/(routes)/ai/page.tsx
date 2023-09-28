@@ -1,42 +1,11 @@
 "use client";
 import { Card } from "@/components/ui/card";
 import { cn } from "@/lib/utils";
-import {
-  MessageSquare,
-  ImageIcon,
-  VideoIcon,
-  Music,
-  Code,
-  ArrowRight,
-} from "lucide-react";
 import { useRouter } from "next/navigation";
 import { motion } from "framer-motion";
-const tools = [
-  {
-    label: "Conversation",
-    icon: MessageSquare,
-    color: "text-violet-400",
-    href: "/conversation",
-  },
-  {
-    label: "Music Generation",
-    icon: Music,
-    color: "text-yellow-400",
-    href: "/music",
-  },
-  {
-    label: "Image Generation",
-    icon: ImageIcon,
-    color: "text-pink-700",
-    href: "/image",
-  },
-  {
-    label: "Code Generation",
-    icon: Code,
-    color: "text-blue-400",
-    href: "/code",
-  },
-];
+import { useTools } from "@/constants";
+import { ArrowRight } from "lucide-react";
+const tools = useTools;
 
 const fadeIn = {
   initial: {

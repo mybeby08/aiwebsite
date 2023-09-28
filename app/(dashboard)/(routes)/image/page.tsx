@@ -20,7 +20,9 @@ import {
 } from "@/components/ui/select";
 import { Card, CardFooter } from "@/components/ui/card";
 import Image from "next/image";
+import { useProModal } from "@/hooks/useProModal";
 const Page = () => {
+  const proModal = useProModal();
   const router = useRouter();
   const [images, setImages] = useState<string[]>([]);
   const form = useForm<z.infer<typeof formSchema>>({
@@ -43,8 +45,11 @@ const Page = () => {
       setImages(urls);
 
       form.reset();
-    } catch (e) {
-      console.log(e);
+    } catch (error: any) {
+      //FIX:PROMODAL ON 403
+      if (error?.response?.status === 403) {
+        proModal.onOpen();
+      }
     } finally {
       router.refresh();
     }

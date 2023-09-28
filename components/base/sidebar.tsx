@@ -4,55 +4,24 @@ import { cn } from "@/lib/utils";
 import { Montserrat } from "next/font/google";
 import Image from "next/image";
 import Link from "next/link";
-import {
-  LayoutDashboard,
-  MessageSquare,
-  ImageIcon,
-  VideoIcon,
-  Music,
-  Code,
-  Settings,
-} from "lucide-react";
 import Counter from "./counter";
 import { usePathname } from "next/navigation";
+import { useTools } from "@/constants";
+import { LayoutDashboard, Settings } from "lucide-react";
 const montserrat = Montserrat({ subsets: ["latin"], weight: "700" });
-const routes = [
-  {
-    label: "Dashboard",
-    href: "/ai",
-    icon: LayoutDashboard,
-    color: "text-sky-400",
-  },
-  {
-    label: "Conversation",
-    href: "/conversation",
-    icon: MessageSquare,
-    color: "text-violet-400",
-  },
-  {
-    label: "Image Generation",
-    href: "/image",
-    icon: ImageIcon,
-    color: "text-yellow-400",
-  },
-  {
-    label: "Music Generation",
-    href: "/music",
-    icon: Music,
-    color: "text-pink-700",
-  },
-  {
-    label: "Code Generation",
-    href: "/code",
-    icon: Code,
-    color: "text-blue-400",
-  },
-  {
-    label: "Settings",
-    href: "/settings",
-    icon: Settings,
-  },
-];
+const montserratSemi = Montserrat({ subsets: ["latin"], weight: "600" });
+const settings = {
+  href: "/settings",
+  label: "Settings",
+  icon: Settings,
+};
+const dashboard = {
+  href: "/ai",
+  label: "Dashboard",
+  icon: LayoutDashboard,
+  color: "text-green-600",
+};
+const routes = useTools;
 interface SidebarProps {
   count: number;
 }
@@ -70,6 +39,21 @@ const Sidebar = ({ count }: SidebarProps) => {
           </h1>
         </Link>
         <div className="space-y-1">
+          <Link
+            href={dashboard.href}
+            key={dashboard.href}
+            className={cn(
+              "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",
+              pathname === dashboard.href ? "bg-white/10" : ""
+            )}
+          >
+            <div className="flex items-center flex-1">
+              <dashboard.icon className={cn("w-5 h-5 mr-3", dashboard.color)} />
+              <span className={montserratSemi.className}>
+                {dashboard.label}
+              </span>
+            </div>
+          </Link>
           {routes.map((route) => (
             <Link
               href={route.href}
@@ -81,10 +65,23 @@ const Sidebar = ({ count }: SidebarProps) => {
             >
               <div className="flex items-center flex-1">
                 <route.icon className={cn("w-5 h-5 mr-3", route.color)} />
-                <span className={montserrat.className}>{route.label}</span>
+                <span className={montserratSemi.className}>{route.label}</span>
               </div>
             </Link>
           ))}
+          <Link
+            href={settings.href}
+            key={settings.href}
+            className={cn(
+              "text-sm group flex p-3 w-full justify-start font-medium cursor-pointer hover:text-white hover:bg-white/10 rounded-lg transition",
+              pathname === settings.href ? "bg-white/10" : ""
+            )}
+          >
+            <div className="flex items-center flex-1">
+              <settings.icon className={cn("w-5 h-5 mr-3")} />
+              <span className={montserratSemi.className}>{settings.label}</span>
+            </div>
+          </Link>
         </div>
       </div>
       <Counter count={count} />
