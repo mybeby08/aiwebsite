@@ -35,7 +35,7 @@ const Page = () => {
           Chat with AI.betsy and explore the AI Playground to generate images,
         </p>
       </div>
-      <div className="px-4 md:px-20 lg:px-32 gap-2 grid grid-cols-3">
+      <div className="px-4 md:px-20 lg:px-32 gap-2 grid grid-cols-2 sm:grid-cols-3">
         {tools.map((tool) => (
           <Card
             onClick={() => router.push(tool.href)}
