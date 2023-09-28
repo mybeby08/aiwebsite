@@ -40,7 +40,7 @@ const LandingContent = () => {
               </Link>
               <Link href={constants.LINKEDIN_URL}>
                 <span className="flex">
-                  <Github className="mr-2" />
+                  <Linkedin className="mr-2" />
                   Linkedin
                 </span>
               </Link>
